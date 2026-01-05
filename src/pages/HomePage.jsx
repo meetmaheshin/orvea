@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import SearchSection from '../components/SearchSection';
 import Properties from '../components/Properties';
 import About from '../components/About';
 import Process from '../components/Process';
@@ -14,6 +15,7 @@ const HomePage = () => {
     <div className="scroll-smooth">
       <Header />
       <Hero />
+      <SearchSection />
       <Properties />
       <About />
       <Process />

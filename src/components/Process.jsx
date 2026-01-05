@@ -13,7 +13,7 @@ const ProcessStep = ({ number, title, description, icon, delay }) => {
     >
       <div className="relative sm:pt-10 pt-5 before:sm:block before:absolute before:-right-10 before:top-0 before:w-[2px] before:h-full before:bg-stone-100 last:before:hidden before:hidden group">
         {/* Giant Background Number */}
-        <span className="absolute right-0 top-0 xl:text-[195px] lg:text-[160px] text-[100px] font-bold opacity-40 leading-[150px] group-hover:opacity-100 group-hover:text-teal duration-300 group-hover:-translate-y-4 group-hover:drop-shadow-xl text-gray-300">
+        <span className="absolute right-0 top-0 xl:text-[195px] lg:text-[160px] text-[100px] font-bold opacity-[0.15] leading-[150px] group-hover:opacity-30 group-hover:text-teal duration-300 group-hover:-translate-y-4 group-hover:drop-shadow-xl text-gray-800">
           {number}
         </span>
 

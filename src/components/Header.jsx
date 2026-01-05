@@ -6,7 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-gray-900 shadow-lg sticky top-0 z-50">
+    <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-1">
           {/* Logo */}
@@ -16,10 +16,10 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a href="#home" className="text-white hover:text-teal transition-all duration-300 font-medium">Home</a>
-            <a href="#about" className="text-white hover:text-teal transition-all duration-300 font-medium">About Us</a>
-            <a href="#properties" className="text-white hover:text-teal transition-all duration-300 font-medium">Our Properties</a>
-            <a href="#contact" className="text-white hover:text-teal transition-all duration-300 font-medium">Contact Us</a>
+            <a href="#home" className="text-gray-700 hover:text-teal transition-all duration-300 font-medium">Home</a>
+            <a href="#about" className="text-gray-700 hover:text-teal transition-all duration-300 font-medium">About Us</a>
+            <a href="#properties" className="text-gray-700 hover:text-teal transition-all duration-300 font-medium">Our Properties</a>
+            <a href="#contact" className="text-gray-700 hover:text-teal transition-all duration-300 font-medium">Contact Us</a>
           </nav>
 
           {/* CTA Buttons */}
@@ -46,7 +46,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-white"
+            className="lg:hidden text-gray-700"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,12 +61,12 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-gray-700 pt-4">
+          <div className="lg:hidden pb-4 border-t border-gray-200 pt-4">
             <nav className="flex flex-col space-y-3">
-              <a href="#home" className="text-white hover:text-teal transition-all duration-300 py-2">Home</a>
-              <a href="#about" className="text-white hover:text-teal transition-all duration-300 py-2">About Us</a>
-              <a href="#properties" className="text-white hover:text-teal transition-all duration-300 py-2">Our Properties</a>
-              <a href="#contact" className="text-white hover:text-teal transition-all duration-300 py-2">Contact Us</a>
+              <a href="#home" className="text-gray-700 hover:text-teal transition-all duration-300 py-2">Home</a>
+              <a href="#about" className="text-gray-700 hover:text-teal transition-all duration-300 py-2">About Us</a>
+              <a href="#properties" className="text-gray-700 hover:text-teal transition-all duration-300 py-2">Our Properties</a>
+              <a href="#contact" className="text-gray-700 hover:text-teal transition-all duration-300 py-2">Contact Us</a>
               <div className="flex flex-col space-y-2 pt-2">
                 <a
                   href="#contact"

@@ -1,145 +1,159 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import { properties } from '../data/properties';
-import { useInView } from '../hooks/useInView';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const Properties = () => {
-  const [filter, setFilter] = useState('All');
-  const [headerRef, headerInView] = useInView({ threshold: 0.3 });
-  const locations = ['All', 'Noida', 'Ghaziabad', 'Raj Nagar Ext.'];
-
-  const filteredProperties = filter === 'All'
-    ? properties
-    : properties.filter(prop => prop.location === filter);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
 
   return (
-    <section id="properties" className="sm:py-14 py-8 bg-white">
+    <section id="properties" className="sm:py-14 py-8 relative pb-0 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div
-          ref={headerRef}
-          className={`text-center mb-12 transition-all duration-1000 transform ${
-            headerInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}
-        >
-          <h2 className="xl:text-5xl lg:text-4xl sm:text-[40px] text-[26px] xl:leading-[58px] lg:leading-[48px] sm:leading-[48px] leading-[28px] font-bold text-text-heading mb-3">
-            Our Premium <span className="text-teal">Properties</span>
-            <span className="text-teal">.</span>
-          </h2>
-          <p className="text-lg text-text-primary max-w-2xl mx-auto font-medium">
-            Explore 168 developer projects across Noida, Ghaziabad, and Raj Nagar Extension
-          </p>
-        </div>
-
-        {/* Filter Buttons */}
-        <div
-          className={`flex flex-wrap justify-center gap-3 mb-12 transition-all duration-1000 transform ${
-            headerInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}
-          style={{ transitionDelay: '200ms' }}
-        >
-          {locations.map((location) => (
-            <button
-              key={location}
-              onClick={() => setFilter(location)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                filter === location
-                  ? 'bg-teal text-white shadow-lg'
-                  : 'bg-stone-50 text-text-primary hover:bg-teal/10 hover:text-teal border border-border'
-              }`}
-            >
-              {location}
-            </button>
-          ))}
-        </div>
-
-        {/* Properties Grid - HouseEazy Style with Overlay */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProperties.map((property, index) => (
-            <Link
-              key={property.id}
-              to={`/property-detail/${property.slug}`}
-              className={`group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-1000 transform hover:-translate-y-2 ${
-                headerInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-              style={{ transitionDelay: `${400 + index * 100}ms` }}
-            >
-              {/* Image with Overlay */}
-              <div className="relative sm:h-80 h-56 overflow-hidden before:bg-gradient-to-t before:from-black before:via-black/60 before:to-transparent before:absolute before:w-full before:h-[70%] before:bottom-0 before:right-0 before:z-10 before:duration-300 group-hover:before:h-[90%]">
-                <img
-                  src={property.image}
-                  alt={property.name}
-                  className="w-full h-full object-cover duration-300 group-hover:scale-110"
-                />
-                {/* Location Badge */}
-                <div className="absolute top-3 right-3 bg-teal text-white px-3 py-1 rounded-full text-sm font-medium z-20">
-                  {property.location}
-                </div>
-              </div>
-
-              {/* Text Overlay */}
-              <div className="absolute w-full sm:p-6 p-4 bottom-0 z-10 text-white">
-                <h3 className="sm:text-xl text-base font-bold mb-1">{property.name}</h3>
-                <p className="text-xs sm:text-sm text-white/90 mb-1">By {property.developer}</p>
-
-                {property.bhk && (
-                  <p className="text-sm font-semibold mb-2 text-white/95">{property.bhk}</p>
-                )}
-
-                {property.price && (
-                  <p className="text-lg font-bold mb-3 text-teal-300">{property.price}</p>
-                )}
-
-                {property.status && (
-                  <span className="inline-block bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded mb-3">
-                    {property.status}
-                  </span>
-                )}
-
-                <div className="flex justify-between items-center text-xs sm:text-sm mt-4">
-                  <div className="font-medium group-hover:translate-x-1 transition-transform duration-300">
-                    View Details →
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    {property.location}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {filteredProperties.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-text-primary text-lg font-medium">No properties found in this location.</p>
+        {/* Header with Navigation Buttons */}
+        <div className="flex justify-between items-center mb-10">
+          <div>
+            <h2 className="xl:text-5xl lg:text-4xl sm:text-[40px] text-[26px] xl:leading-[58px] lg:leading-[48px] sm:leading-[48px] leading-[28px] font-bold text-text-heading mb-3">
+              <span>Buyer Property</span>
+              <span className="text-teal">.</span>
+            </h2>
+            <p className="text-lg text-text-primary font-medium">
+              Explore some of the top-listed properties on our website.
+            </p>
           </div>
-        )}
-
-        <div
-          className={`text-center mt-12 transition-all duration-1000 transform ${
-            headerInView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}
-          style={{ transitionDelay: '800ms' }}
-        >
-          <a
-            href="#properties"
-            className="group inline-flex items-center justify-center bg-teal text-white px-8 py-3 rounded-3xl font-semibold hover:bg-teal-dark transition-all duration-300 transform hover:scale-105 text-lg"
-          >
-            Explore All Properties
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-5 h-5 inline ml-2 duration-300 group-hover:translate-x-3"
+          <div className="flex sm:space-x-4 space-x-2">
+            <button
+              ref={prevRef}
+              type="button"
+              className="prevSlide sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] border-2 border-teal rounded-full text-center text-teal cursor-pointer hover:bg-teal hover:text-white transition-all duration-300 flex items-center justify-center"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-            </svg>
-          </a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="sm:w-6 sm:h-6 h-4 w-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                />
+              </svg>
+            </button>
+            <button
+              ref={nextRef}
+              type="button"
+              className="nextSlide sm:w-[60px] sm:h-[60px] w-[40px] h-[40px] border-2 border-teal rounded-full text-center text-teal cursor-pointer hover:bg-teal hover:text-white transition-all duration-300 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="sm:w-6 sm:h-6 h-4 w-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Swiper Carousel */}
+        <div className="relative">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={24}
+            slidesPerView={1}
+            centeredSlides={false}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+            }}
+            className="!pb-4"
+          >
+            {properties.map((property) => (
+              <SwiperSlide key={property.id}>
+                <div className="relative group">
+                  <Link to={`/property-detail/${property.slug}`}>
+                    <div className="relative sm:h-80 h-56 rounded-2xl overflow-hidden before:bg-gradient-to-t before:from-black before:via-black/60 before:to-transparent before:absolute before:w-full before:h-[70%] before:bottom-0 before:right-0 before:z-10 before:duration-300 group-hover:before:h-[90%]">
+                      <img
+                        alt={property.name}
+                        loading="lazy"
+                        decoding="async"
+                        className="duration-300 group-hover:scale-110 w-full h-full object-cover"
+                        src={property.image}
+                      />
+                    </div>
+                    <div className="absolute w-full sm:p-6 p-4 bottom-0 z-10 text-white">
+                      <h4 className="sm:text-xl text-sm font-semibold my-1">
+                        {property.name}
+                      </h4>
+                      <p className="mt-4 sm:text-[12px] sm:leading-[18px] text-[10px] leading-[14px] line-clamp-3">
+                        {property.bhk} • {property.area}
+                      </p>
+                      <div className="flex justify-between content-evenly text-xs mt-4">
+                        <div className="sm:text-[12px] text-[8px] sm:leading-[20px] leading-[12px]">
+                          View More
+                        </div>
+                        <div className="text-right sm:text-[12px] text-[8px] sm:leading-[20px] leading-[12px]">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1"
+                            stroke="currentColor"
+                            className="inline sm:w-5 sm:h-5 w-3 h-3"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                            />
+                          </svg>{' '}
+                          {property.address || property.location}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
+  const [showComingSoonModal, setShowComingSoonModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,6 +15,11 @@ const Footer = () => {
     } else {
       alert('Please enter a valid email address');
     }
+  };
+
+  const handleComingSoon = () => {
+    setShowComingSoonModal(true);
+    setTimeout(() => setShowComingSoonModal(false), 3000);
   };
 
   const scrollToSection = (sectionId) => {
@@ -157,7 +163,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={handleComingSoon}
                   className="text-gray-400 hover:text-teal transition-all duration-300 cursor-pointer text-left"
                 >
                   Sell Property
@@ -165,7 +171,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={handleComingSoon}
                   className="text-gray-400 hover:text-teal transition-all duration-300 cursor-pointer text-left"
                 >
                   Property Valuation
@@ -173,7 +179,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={handleComingSoon}
                   className="text-gray-400 hover:text-teal transition-all duration-300 cursor-pointer text-left"
                 >
                   Legal Assistance
@@ -181,7 +187,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('contact')}
+                  onClick={handleComingSoon}
                   className="text-gray-400 hover:text-teal transition-all duration-300 cursor-pointer text-left"
                 >
                   Home Loans
@@ -204,7 +210,7 @@ const Footer = () => {
                 <svg className="w-5 h-5 mr-2 mt-1 flex-shrink-0 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:info@orveaestates.com" className="hover:text-teal transition-all duration-300">info@orveaestates.com</a>
+                <a href="mailto:admin@orveaestates.com" className="hover:text-teal transition-all duration-300">admin@orveaestates.com</a>
               </li>
               <li className="flex items-start">
                 <svg className="w-5 h-5 mr-2 mt-1 flex-shrink-0 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,13 +225,40 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>
+          <p className="mb-2">
             &copy; Orvea India Pvt Ltd. All rights reserved. | {' '}
             <Link to="/privacy-policy" className="hover:text-teal transition-all duration-300">Privacy Policy</Link> | {' '}
             <Link to="/terms-of-service" className="hover:text-teal transition-all duration-300">Terms of Service</Link>
           </p>
+          <p className="text-sm">
+            Developed and maintained by {' '}
+            <a
+              href="mailto:2zeroinc@gmail.com"
+              className="text-teal hover:text-teal-dark transition-all duration-300 font-semibold"
+            >
+              TWO ZERO
+            </a>
+          </p>
         </div>
       </div>
+
+      {/* Coming Soon Modal */}
+      {showComingSoonModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-4 transform animate-bounce-in">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-teal bg-opacity-10 mb-4">
+                <svg className="h-10 w-10 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Coming Soon!</h3>
+              <p className="text-gray-600 mb-4">This feature is under development and will be available soon.</p>
+              <p className="text-sm text-gray-500">Thank you for your patience!</p>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };
