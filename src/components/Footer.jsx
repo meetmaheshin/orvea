@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold text-teal mb-4">Orvea Estates</h3>
+            <h3 className="text-2xl font-bold text-teal mb-4">ORVÉA Estates</h3>
             <p className="text-gray-400 mb-4">
               Your trusted real estate partner, making property transactions seamless and transparent.
             </p>
@@ -226,7 +226,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
           <p className="mb-2">
-            &copy; Orvea India Pvt Ltd. All rights reserved. | {' '}
+            &copy; ORVÉA India Pvt Ltd. All rights reserved. | {' '}
             <Link to="/privacy-policy" className="hover:text-teal transition-all duration-300">Privacy Policy</Link> | {' '}
             <Link to="/terms-of-service" className="hover:text-teal transition-all duration-300">Terms of Service</Link>
           </p>

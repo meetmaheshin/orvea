@@ -7,14 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand and primary colors (HouseEazy theme)
+        // Brand and primary colors (Orvea Estates green theme)
         primary: {
-          DEFAULT: '#00A6A6',
-          dark: '#008080',
+          DEFAULT: '#5c9531',
+          dark: '#4a7a27',
         },
         teal: {
-          DEFAULT: '#00A6A6',
-          dark: '#008080',
+          DEFAULT: '#5c9531',
+          dark: '#4a7a27',
         },
         // Accent colors
         coral: '#ED716C',

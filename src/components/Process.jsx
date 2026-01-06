@@ -97,7 +97,7 @@ const Process = () => {
             }`}
           >
             <p className="text-text-primary">
-              Today, almost everything has been digitally transformed. It is only fitting that the residential reselling business keeps up with the changing times. We are, therefore, redefining the process through Orvea Estates. Buying through us can be best broken down into three simple steps.
+              Today, almost everything has been digitally transformed. It is only fitting that the residential reselling business keeps up with the changing times. We are, therefore, redefining the process through ORVÉA Estates. Buying through us can be best broken down into three simple steps.
             </p>
           </div>
         </div>

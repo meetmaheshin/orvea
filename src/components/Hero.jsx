@@ -59,7 +59,7 @@ const Hero = () => {
           {/* Left Content */}
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
-              Find Your Dream Home with <span className="text-teal">Orvea Estates</span>
+              Find Your Dream Home with <span className="text-teal">ORVÉA Estates</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-100 drop-shadow-md">
               Your most trusted real estate partner. Buy, sell, and explore properties with complete transparency and expert guidance.

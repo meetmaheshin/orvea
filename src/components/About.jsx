@@ -49,12 +49,12 @@ const About = () => {
               <h2 className="xl:text-5xl lg:text-4xl sm:text-[40px] text-[26px] xl:leading-[58px] lg:leading-[48px] sm:leading-[48px] leading-[28px] font-bold text-white mb-3">
                 <span>About</span>
                 <br />
-                <span className="text-teal">Orvea Estates</span>
+                <span className="text-teal">ORVÉA Estates</span>
                 <span className="text-white">.</span>
               </h2>
 
               <p className="mb-4 whitespace-pre-line font-semibold text-white/90 leading-relaxed">
-                Orvea Estates is a new age digital platform that aims to change the way resale transactions are done.{'\n'}
+                ORVÉA Estates is a new age digital platform that aims to change the way resale transactions are done.{'\n'}
                 Sellers & Buyers can now avoid the long & tedious traditional process and conclude the transaction at the best price, at the click of a button.{'\n'}
                 Our platform offers seamless and direct flow of information to all stakeholders, thereby bringing complete transparency and trust.
               </p>

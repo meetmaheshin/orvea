@@ -11,7 +11,7 @@ const Header = () => {
         <div className="flex items-center justify-between py-1">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Orvea Estates" className="h-24 md:h-28 lg:h-32 w-auto cursor-pointer" />
+            <img src={logo} alt="ORVÉA Estates" className="h-24 md:h-28 lg:h-32 w-auto cursor-pointer" />
           </Link>
 
           {/* Desktop Navigation */}
